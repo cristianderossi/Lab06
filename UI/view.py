@@ -65,8 +65,10 @@ class View:
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
 
-        pulsante_mostra=ft.Button("mostra")
-        pulsante_cerca_tipo = ft.Button("Cerca")
+        pulsante_mostra=ft.Button("mostra", on_click=self.controller.mostra_strumenti_ricerca)
+        pulsante_cerca_tipo = ft.Button("Cerca",on_click=self.controller.aggiungi_strumento)
+
+
 
 
 
@@ -92,21 +94,18 @@ class View:
             ft.Row(spacing=10,
                    controls=[ft.Text('strumenti',size=20),pulsante_mostra],
                    alignment=ft.MainAxisAlignment.START),
-
-            ft.Divider(),)
-
-
-
+            self.lista_strumenti,
+            ft.Divider(),
 
             # Sezione 4
             # todo
 
-        ft.Text('Ricerca Strumento Per Tipo',size=20),
-        ft.Row(spacing=200,
-               controls=[self.input_tipo_strumento,pulsante_conferma_responsabile],
-               alignment=ft.MainAxisAlignment.START),
-
-        ft.Divider(),
+            ft.Text('Ricerca Strumento Per Tipo',size=20),
+            ft.Row(spacing=10,
+                   controls=[self.input_tipo_strumento,pulsante_cerca_tipo],
+                   alignment=ft.MainAxisAlignment.START),
+            self.lista_strumenti_ricerca
+    )
 
 
     def cambia_tema(self, e):

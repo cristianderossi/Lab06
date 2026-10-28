@@ -29,3 +29,39 @@ class Controller:
 
     # Altre Funzioni Event Handler
     # TODO
+
+
+    def mostra_strumenti_ricerca(self,e):
+        lista_strumenti=self._model.get_strumenti()
+
+        self._view.lista_strumenti_ricerca.controls.clear()
+
+        for strumento in lista_strumenti:
+            self._view.lista_strumenti.controls.append(ft.Text(strumento.__str__()))
+            self._view.update()
+
+
+    def aggiungi_strumento(self,e):
+        tipo=self._view.input_tipo_strumento.value.strip()
+
+        if not tipo:
+            self._view.show_alert('inserisci tipo')
+            return
+
+        lista_tipo=self._model.cerca_strumenti_per_tipo(tipo)
+
+        self._view.lista_strumenti_ricerca.controls.clear()
+
+        for strumento in lista_tipo:
+            self._view.lista_strumenti_ricerca.controls.append(ft.Text(strumento.__str__()))
+
+            self._view.update()
+
+
+
+
+
+
+
+
+

@@ -47,10 +47,10 @@ class DepositoStrumenti:
 
         cursor= cnx.cursor()
         try:
-            query = """""
-                    SELECT *
-                    FROM Strumento
-                    """''
+            query = """
+                        SELECT *
+                        FROM strumento
+                    """
 
             cursor.execute(query)
 
@@ -86,11 +86,11 @@ class DepositoStrumenti:
 
         cursor = cnx.cursor()
         try:
-            query =        """""
-                           SELECT *
-                           FROM strumento
-                           where tipo = %s
-                            """""
+            query = """
+                        SELECT *
+                        FROM strumento
+                        WHERE tipo = %s
+                    """
 
             cursor.execute(query,(tipo,))
 
@@ -109,12 +109,5 @@ class DepositoStrumenti:
         finally:
             cursor.close()
             cnx.close()
-
-
-
-
-
-
-
 
 
