@@ -1,3 +1,7 @@
+from select import select
+import mysql.connector
+from mysql.connector import cursor
+
 from database.DB_connect import get_connection
 from model.strumento import Strumento
 from model.prestito import Prestito
@@ -37,6 +41,37 @@ class DepositoStrumenti:
         """
         # TODO
 
+        cnx = get_connection()
+        if cnx is None:
+            raise ConnectionError('Impossibile creare il database')
+
+        cursor= cnx.cursor()
+        try:
+            query = """""
+                    SELECT *
+                    FROM Strumento
+                    """''
+
+            cursor.execute(query)
+
+
+            lista_strumenti = []
+            for row in cursor:
+                lista_strumenti.append(Strumento(row[0],
+                                       row[1],
+                                       row[2],
+                                       row[3],
+                                       row[4],
+                                       row[5]))
+
+            return lista_strumenti
+
+        finally:
+            cursor.close()
+            cnx.close()
+
+
+
     def cerca_strumenti_per_tipo(self, tipo) -> list[Strumento] | None:
         """
             Funzione che recupera una lista con tutti gli strumenti presenti nel database di un certo tipo
@@ -44,3 +79,42 @@ class DepositoStrumenti:
             :return: una lista con tutti gli strumenti del tipo indicato oppure None
         """
         # TODO
+
+        cnx = get_connection()
+        if cnx is None:
+            raise ConnectionError('Impossibile creare il database')
+
+        cursor = cnx.cursor()
+        try:
+            query =        """""
+                           SELECT *
+                           FROM strumento
+                           where tipo = %s
+                            """""
+
+            cursor.execute(query,(tipo,))
+
+            lista_2 = []
+
+            for row in cursor:
+             lista_2.append(Strumento(row[0],
+                                             row[1],
+                                             row[2],
+                                             row[3],
+                                             row[4],
+                                             row[5]))
+
+            return lista_2
+
+        finally:
+            cursor.close()
+            cnx.close()
+
+
+
+
+
+
+
+
+

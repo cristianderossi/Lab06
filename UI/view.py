@@ -65,6 +65,11 @@ class View:
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
 
+        pulsante_mostra=ft.Button("mostra")
+        pulsante_cerca_tipo = ft.Button("Cerca")
+
+
+
         # --- LAYOUT ---
         self.page.add(
             self.toggle_cambia_tema,
@@ -84,11 +89,32 @@ class View:
             # Sezione 3
             # TODO
 
+            ft.Row(spacing=10,
+                   controls=[ft.Text('strumenti',size=20),pulsante_mostra],
+                   alignment=ft.MainAxisAlignment.START),
+
+            ft.Divider(),)
+
+
+
+
             # Sezione 4
-            # TODO
-        )
+            # todo
+
+        ft.Text('Ricerca Strumento Per Tipo',size=20),
+        ft.Row(spacing=200,
+               controls=[self.input_tipo_strumento,pulsante_conferma_responsabile],
+               alignment=ft.MainAxisAlignment.START),
+
+        ft.Divider(),
+
 
     def cambia_tema(self, e):
         self.page.theme_mode = ft.ThemeMode.DARK if self.toggle_cambia_tema.value else ft.ThemeMode.LIGHT
         self.toggle_cambia_tema.label = "Tema scuro" if self.toggle_cambia_tema.value else "Tema chiaro"
         self.page.update()
+
+
+
+
+
